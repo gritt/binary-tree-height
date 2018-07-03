@@ -39,7 +39,39 @@ struct node *insert(struct node *root, int data) {
 
 int getHeight(struct node *root) {
 
-    return 1;
+    int rightPath = 0;
+    int leftPath = 0;
+
+    if (root == NULL) {
+        return 0;
+    }
+
+    /*
+     * Solution:
+     *
+     * Recursively calls getHeight passing the next node (right or left) as root and summing +1
+     * Do it till there are no more left or right nodes left to go
+     *
+     * 7
+     * 3 5 2 1 4 6 7
+     *
+     *             3
+     *          2     5
+     *       1      4   6
+     *                    7
+     *
+     *
+     */
+
+    if (root->left != NULL) {
+        leftPath = 1 + getHeight(root->left);
+    }
+
+    if (root->right != NULL) {
+        rightPath = 1 + getHeight(root->right);
+    }
+
+    return rightPath > leftPath ? rightPath : leftPath;
 }
 
 int main() {
